@@ -1,0 +1,3 @@
+C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build/CMakeFiles/BSTBankingApp.dir
+C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build/CMakeFiles/edit_cache.dir
+C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build/CMakeFiles/rebuild_cache.dir

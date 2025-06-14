@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/BSTBankingApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\BSTBankingApp.dir\\src\\BankingAppMain.cpp.obj -c C:\\Users\\Alejandro\\.vscode\\CppCode\\BSTBankingApp\\src\\BankingAppMain.cpp",
+  "file": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/src/BankingAppMain.cpp",
+  "output": "CMakeFiles/BSTBankingApp.dir/src/BankingAppMain.cpp.obj"
+},
+{
+  "directory": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/BSTBankingApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\BSTBankingApp.dir\\src\\Account.cpp.obj -c C:\\Users\\Alejandro\\.vscode\\CppCode\\BSTBankingApp\\src\\Account.cpp",
+  "file": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/src/Account.cpp",
+  "output": "CMakeFiles/BSTBankingApp.dir/src/Account.cpp.obj"
+},
+{
+  "directory": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/BSTBankingApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\BSTBankingApp.dir\\src\\SavingsAccount.cpp.obj -c C:\\Users\\Alejandro\\.vscode\\CppCode\\BSTBankingApp\\src\\SavingsAccount.cpp",
+  "file": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/src/SavingsAccount.cpp",
+  "output": "CMakeFiles/BSTBankingApp.dir/src/SavingsAccount.cpp.obj"
+},
+{
+  "directory": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/BSTBankingApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\BSTBankingApp.dir\\src\\CheckingAccount.cpp.obj -c C:\\Users\\Alejandro\\.vscode\\CppCode\\BSTBankingApp\\src\\CheckingAccount.cpp",
+  "file": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/src/CheckingAccount.cpp",
+  "output": "CMakeFiles/BSTBankingApp.dir/src/CheckingAccount.cpp.obj"
+},
+{
+  "directory": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/BSTBankingApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\BSTBankingApp.dir\\src\\BankingApp.cpp.obj -c C:\\Users\\Alejandro\\.vscode\\CppCode\\BSTBankingApp\\src\\BankingApp.cpp",
+  "file": "C:/Users/Alejandro/.vscode/CppCode/BSTBankingApp/src/BankingApp.cpp",
+  "output": "CMakeFiles/BSTBankingApp.dir/src/BankingApp.cpp.obj"
+}
+]

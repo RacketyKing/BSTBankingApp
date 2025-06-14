@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\BSTBankingApp.dir/objects.a
+C:\msys64\ucrt64\bin\ar.exe qc CMakeFiles\BSTBankingApp.dir/objects.a @CMakeFiles\BSTBankingApp.dir\objects1.rsp
+C:\msys64\ucrt64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\BSTBankingApp.dir/objects.a -Wl,--no-whole-archive -o BSTBankingApp.exe -Wl,--out-implib,libBSTBankingApp.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\BSTBankingApp.dir\linkLibs.rsp
