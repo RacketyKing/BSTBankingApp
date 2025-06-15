@@ -30,6 +30,15 @@ void BankingApp::addAccount(const std::string& accountType) {
     }
 }
 
-void:: BankingApp::viewAccount() const {
+
+void BankingApp::depositAccount(const std::string& accountNumber, const float amount) {
+    accountTree->depositNode(accountNumber, amount);
+}
+
+void BankingApp::withdrawAccount(const std::string& accountNumber, const float amount) {
+    accountTree->withdrawNode(accountNumber, amount);
+}
+
+void BankingApp::viewAccount() const {
     accountTree->display();
 }

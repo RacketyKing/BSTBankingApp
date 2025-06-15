@@ -36,7 +36,7 @@ std::istream& operator>>(std::istream& is, SavingsAccount& savings) {
 
     std::cout << "Enter interest rate: ";
     is >> interest;
-    if(interest > 0.00f && interest >= 100.00f) {
+    if(interest > 0.00f && interest <= 100.00f) {
         savings.setInterestRate(interest);
     }
     else {
