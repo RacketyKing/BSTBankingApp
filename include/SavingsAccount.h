@@ -11,6 +11,9 @@ public:
 
     void display() const override;
     bool withdrawal(const float) override;
+    Account* clone() const override {
+        return new SavingsAccount(*this);
+    }
 
     void setInterestRate(const float);
     float getInterestRate() const;

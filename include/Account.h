@@ -11,6 +11,7 @@ public:
 
     Account(const std::string, const float);
     Account();
+    virtual Account* clone() const = 0;
     virtual ~Account() = default;
 
     bool deposit(const float);

@@ -11,6 +11,9 @@ public:
 
     void display() const override;
     bool withdrawal(const float) override;
+    Account* clone() const override {
+        return new CheckingAccount(*this);
+    }
 
     void setOverDraftLimit(const float);
     float getOverDraftLimit() const;

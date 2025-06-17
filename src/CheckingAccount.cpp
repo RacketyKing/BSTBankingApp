@@ -4,6 +4,7 @@ CheckingAccount::CheckingAccount(const std::string& accountNumber, const float b
 CheckingAccount::CheckingAccount() : Account(), overDraftLimit(0.00f) {}
 
 void CheckingAccount:: display() const{
+     std::cout << "\nWelcome, dear customer!" << std::endl;
     std::cout << "Checking Account - ";
     std::cout << "Account Number: " << getAccountNumber() << ", ";
     std::cout << "Balance: $" << getBalance() << ", ";
@@ -34,13 +35,17 @@ std::istream& operator>>(std::istream& is, CheckingAccount& checking) {
     float overDraftLimit;
     is >> static_cast<Account&>(checking);
 
-    std::cout << "Enter OverDraftLimit: $";
-    is >> overDraftLimit;
-    if(overDraftLimit > 0.00f && overDraftLimit < 1000.00f) {
-        checking.setOverDraftLimit(overDraftLimit);
-    }
-    else {
-        std::cerr << "Invalid OverDraftLimit Value" << "\n";
+    bool loop = true;
+    while(loop) {
+        std::cout << "Enter OverDraftLimit: $";
+        is >> overDraftLimit;
+        if(overDraftLimit > 0.00f && overDraftLimit < 1000.00f) {
+            checking.setOverDraftLimit(overDraftLimit);
+            loop = false;
+        }
+        else {
+            std::cerr << "Invalid OverDraftLimit Value! must be between (0 - 1000.00)" << "\n";
+        }
     }
     return is;
 }

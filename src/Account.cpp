@@ -32,15 +32,15 @@ std::istream& operator>>(std::istream& is, Account& account) {
     loop = true;
 
     while(loop) {
-        std::cout << "Enter Account Balance: ";
+        std::cout << "Enter Account Balance: $";
         is >> balance;
 
-        if(balance > 0.00 || balance < 999999.99f) {
+        if(balance > 0.00 && balance < 999999.99f) {
             account.setBalance(balance);
             loop = false;
         }
         else {
-            std::cerr << "Invalid deposit amount\n";
+            std::cerr << "Invalid deposit amount! must be between ($0.00 - $999999.99)\n";
         }
     }
     return is;
@@ -50,12 +50,12 @@ Account::Account(const std::string accountNumber, const float balance): accountN
 Account::Account(): accountNumber("nil"), balance(0.00f) {}
 
 bool Account::deposit(const float depositAmount) {
-    if(depositAmount > 0.00f || depositAmount < 9999999.99f) {
+    if(depositAmount > 0.00f && depositAmount < 9999999.99f) {
         setBalance(getBalance() + depositAmount);
         return true;
     }
     else {
-        std::cerr << "Invalid deposit amount\n";
+        std::cerr << "Invalid deposit amount! must be between ($0.00 - $999999.99)\n";
         return false;
     }
     
@@ -73,7 +73,7 @@ bool Account::withdrawal(const float withdrawAmount) {
 }
 
 void Account::display() const{
-    std::cout << "Welcome, dear customer!" << std::endl;
+    std::cout << "\nWelcome, dear customer!" << std::endl;
     std::cout << "Account Number: " << getAccountNumber() << std::endl;
     std::cout << "Account Balance: $" << getBalance() << "\n\n";
 }

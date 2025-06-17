@@ -27,11 +27,14 @@ private:
 template <typename NODE>
 TreeNode<NODE>::TreeNode(NODE* account) : account(account), leftPtr(nullptr), rightPtr(nullptr) {}
 template <typename NODE>
-TreeNode<NODE>::~TreeNode() {std::cout << "Deleting TreeNode variables - account, rightPtr, leftPtr!\n"; delete account; delete leftPtr; delete rightPtr;}
+TreeNode<NODE>::~TreeNode() {std::cout << "Deleting TreeNode variables - rightPtr, leftPtr!\n\n"; delete leftPtr; delete rightPtr;}
 
 template<typename NODE>
 void TreeNode<NODE>:: setAccount(NODE* account) {
-    this->account = account;
+    if(this->account != account) {
+        delete this->account;
+        this->account = account;
+    }
 }
 template<typename NODE>
 NODE* TreeNode<NODE>::getAccount() const {

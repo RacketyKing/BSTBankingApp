@@ -12,8 +12,9 @@ public:
     ~BankingApp();
 
     void addAccount(const std::string&);
-    void depositAccount(const std::string&, const float);
-    void withdrawAccount(const std::string&, const float);
+    void deleteAccount(const std::string&);
+    bool depositAccount(const std::string&, const float);
+    bool withdrawAccount(const std::string&, const float);
     void viewAccount() const;
 
 private:

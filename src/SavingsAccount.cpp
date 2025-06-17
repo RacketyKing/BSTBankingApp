@@ -4,6 +4,7 @@ SavingsAccount::SavingsAccount(const std::string& accountNumber, const float bal
 SavingsAccount::SavingsAccount(): Account(), interest(0.00f) {}
 
 void SavingsAccount::display() const {
+     std::cout << "\nWelcome, dear customer!" << std::endl;
     std::cout << "Savings Account - ";
     std::cout << "Account Number: " << getAccountNumber() << ", ";
     std::cout << "Balance: $" << getBalance() << ", ";
@@ -34,13 +35,17 @@ std::istream& operator>>(std::istream& is, SavingsAccount& savings) {
     float interest;
     is >> static_cast<Account&>(savings);
 
-    std::cout << "Enter interest rate: ";
-    is >> interest;
-    if(interest > 0.00f && interest <= 100.00f) {
-        savings.setInterestRate(interest);
-    }
-    else {
-        std::cerr << "Invalid interest rate value!" << std::endl;
+    bool loop = true;
+    while(loop) {
+        std::cout << "Enter interest rate: ";
+        is >> interest;
+        if(interest > 0.00f && interest <= 100.00f) {
+            savings.setInterestRate(interest);
+            loop = false;
+        }
+        else {
+            std::cerr << "Invalid interest rate value! must be between (0 - 100)" << std::endl;
+        }
     }
     return is;
 }
