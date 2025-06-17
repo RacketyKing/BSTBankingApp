@@ -13,9 +13,10 @@ public:
 
     void addAccount(const std::string&);
     void deleteAccount(const std::string&);
-    bool depositAccount(const std::string&, const float);
-    bool withdrawAccount(const std::string&, const float);
+    void depositAccount(const std::string&, const float);
+    void withdrawAccount(const std::string&, const float);
     void viewAccount() const;
+    void saveToFile(const std::string&) const;
 
 private:
     Tree<Account>* accountTree;

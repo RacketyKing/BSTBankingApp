@@ -4,7 +4,6 @@ CheckingAccount::CheckingAccount(const std::string& accountNumber, const float b
 CheckingAccount::CheckingAccount() : Account(), overDraftLimit(0.00f) {}
 
 void CheckingAccount:: display() const{
-     std::cout << "\nWelcome, dear customer!" << std::endl;
     std::cout << "Checking Account - ";
     std::cout << "Account Number: " << getAccountNumber() << ", ";
     std::cout << "Balance: $" << getBalance() << ", ";
@@ -25,9 +24,17 @@ bool CheckingAccount::withdrawal(const float withdrawAmount) {
 void CheckingAccount::setOverDraftLimit(const float overDraftLimit) {this->overDraftLimit = overDraftLimit;}
 float CheckingAccount::getOverDraftLimit() const {return this->overDraftLimit;}
 
+// std::ostream& operator<<(std::ostream& os, const CheckingAccount& checking) {
+//     os << static_cast<const Account&>(checking);
+//     os << "Overdraft Limit: $" << checking.getOverDraftLimit() << "\n";
+//     return os;
+// }
+
 std::ostream& operator<<(std::ostream& os, const CheckingAccount& checking) {
-    os << static_cast<const Account&>(checking);
-    os << "Overdraft Limit: $" << checking.getOverDraftLimit() << "\n";
+    return checking.print(os); 
+}
+std::ostream& CheckingAccount::print(std::ostream& os) const {
+    os << "Checking " << getAccountNumber() << " " << getBalance() << " " << getOverDraftLimit();
     return os;
 }
 

@@ -34,24 +34,18 @@ void BankingApp::deleteAccount(const std::string& accountNumber) {
     accountTree->deleteNode(accountNumber);
 }
 
-bool BankingApp::depositAccount(const std::string& accountNumber, const float amount) {
-    if(accountTree->depositNode(accountNumber, amount)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+void BankingApp::depositAccount(const std::string& accountNumber, const float amount) {
+    accountTree->depositNode(accountNumber, amount);
 }
 
-bool BankingApp::withdrawAccount(const std::string& accountNumber, const float amount) {
-    if(accountTree->withdrawNode(accountNumber, amount)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+void BankingApp::withdrawAccount(const std::string& accountNumber, const float amount) {
+    accountTree->withdrawNode(accountNumber, amount);
 }
 
 void BankingApp::viewAccount() const {
     accountTree->display();
+}
+
+void BankingApp::saveToFile(const std::string& fileName) const{
+    accountTree->saveToFile(fileName);
 }

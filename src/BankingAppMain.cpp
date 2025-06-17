@@ -7,6 +7,7 @@
 void bankMenu();
 bool accountNumberHandler(const std::string&);
 bool depositOrWithdrawHandler(const float);
+bool choiceHandler(const unsigned int);
 
 int main() {
     BankingApp bank;
@@ -16,9 +17,19 @@ int main() {
 
     while(loop) {
         bankMenu();
-        std::cin.clear(); 
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cin >> choice;
+        while(true) {
+            std::cin >> choice;
+
+            if(choiceHandler(choice)) {
+                break;
+            }
+            else {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a digit from 1 to 8 only.\n";
+                std::cout << "Enter your choice: ";
+            }
+        }
 
         switch (choice)
         {
@@ -30,16 +41,12 @@ int main() {
             break;
         case DEPOSIT:
         {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            
             float deposit;
             std::string accountNumber;
             try{
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                bool loop = true;
-                while(loop) {
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                while(true) {
                     std::cout << "Enter Account Number for Deposit: ";
                     std::getline(std::cin, accountNumber);
                     
@@ -48,14 +55,14 @@ int main() {
 
                     if(accountNumberHandler(accountNumber) && depositOrWithdrawHandler(deposit)) {
                         std::cout << "\nValid inputs!\n";
-                        loop = false;
+                        bank.depositAccount(accountNumber, deposit);
+                        break;
                     }
-                }
-                if(bank.depositAccount(accountNumber, deposit)) {
-                     std::cout << "\nDeposit Completed Successfully.\n\n";
-                }
-                else {
-                    std::cout << "\nDeposit Unsuccessful. Account Number not Found!\n\n";
+                    else {
+                        std::cout << "Invalid input. Try again.\n";
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    }
                 }
 
             }
@@ -66,31 +73,27 @@ int main() {
         }
         case WITHDRAW:
         {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             float withdraw;
             std::string accountNumber;
             try{
-                std::cin.clear();
-
-                bool loop = true;
-                while(loop) {
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Enter Account Number for Deposit: ";
+                while(true) {
+                    std::cout << "Enter Account Number for Withdrawal: ";
                     std::getline(std::cin, accountNumber);
                     
-                    std::cout << "Enter the deposit amount: ";
+                    std::cout << "Enter the withdrawal amount: ";
                     std::cin >> withdraw;
 
                     if(accountNumberHandler(accountNumber) && depositOrWithdrawHandler(withdraw)) {
                         std::cout << "\nValid inputs!\n";
-                        loop = false;
+                        bank.withdrawAccount(accountNumber, withdraw);
+                        break;
                     }
-                }
-                if(bank.withdrawAccount(accountNumber, withdraw)) {
-                     std::cout << "\nWithdrawal Completed Successfully.\n\n";
-                }
-                else {
-                    std::cout << "\nWithdrawal Unsuccessful. Account Number not Found!\n\n";
+                    else {
+                        std::cout << "Invalid input. Try again.\n";
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    }
                 }
 
             }
@@ -103,23 +106,33 @@ int main() {
             bank.viewAccount();
             break;
         case SAVE:
-            std::cout << "Not implemented yet\n";
+        {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::string fileName;
+            std::cout << "Enter file name: ";
+            std::getline(std::cin, fileName);
+
+            bank.saveToFile(fileName);
             break;
+        }
         case DELETE:
         {
-            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::string accountNumber;
 
-             bool loop = true;
-            while(loop) {
+            while(true) {
                 std::cout << "Enter Account Number for Deposit: ";
                 std::getline(std::cin, accountNumber);
 
                 if(accountNumberHandler(accountNumber)) {
                     std::cout << "\nValid input!\n";
                     bank.deleteAccount(accountNumber);
-                    loop = false;
+                    break;
+                }
+                else {
+                    std::cout << "Invalid input. Try again.\n";
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 }
             }
             break;
@@ -133,16 +146,9 @@ int main() {
             std::cerr << "Invalid choice!\n";
             break;
         }
+
+        std::cin.clear(); 
     }
-    // bank.addAccount("checking");
-    // bank.addAccount("savings");
-    // bank.addAccount("checking");
-    // bank.viewAccount();
-    // bank.depositAccount("234567891", 100.50);
-    // bank.withdrawAccount("012345678", 100.00);
-    // bank.viewAccount();
-    // bank.deleteAccount("234567891");
-    // bank.viewAccount();
 }
 
 void bankMenu() {
@@ -152,7 +158,7 @@ void bankMenu() {
     std::cout << "3. Deposit\n";
     std::cout << "4. Withdraw\n";
     std::cout << "5. Display Accounts\n";
-    std::cout << "6. Save Accounts to File (not implemented yet)\n";
+    std::cout << "6. Save Accounts to File\n";
     std::cout << "7. Delete Account\n";
     std::cout << "8. Exit\n\n";
     std::cout << "Enter your choice: ";
@@ -168,4 +174,10 @@ bool depositOrWithdrawHandler(const float amount) {
     std::string input = std::to_string(amount);
     std::regex floatPattern(R"([+-]?([0-9]*[.])?[0-9]+([eE][+-]?[0-9]+)?)");
     return std::regex_match(input, floatPattern);
+}
+
+bool choiceHandler(const unsigned int choice) {
+    std::string input = std::to_string(choice);
+    std::regex choicePattern(R"(^[1-8$])");
+    return std::regex_match(input, choicePattern);
 }

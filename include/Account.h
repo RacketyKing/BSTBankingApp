@@ -24,6 +24,9 @@ public:
     void setBalance(const float);
     float getBalance() const;
 
+protected:
+    virtual std::ostream& print(std::ostream&) const;
+
 private:
     std::string accountNumber;
     float balance;

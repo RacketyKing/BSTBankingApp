@@ -4,7 +4,6 @@ SavingsAccount::SavingsAccount(const std::string& accountNumber, const float bal
 SavingsAccount::SavingsAccount(): Account(), interest(0.00f) {}
 
 void SavingsAccount::display() const {
-     std::cout << "\nWelcome, dear customer!" << std::endl;
     std::cout << "Savings Account - ";
     std::cout << "Account Number: " << getAccountNumber() << ", ";
     std::cout << "Balance: $" << getBalance() << ", ";
@@ -25,9 +24,17 @@ bool SavingsAccount::withdrawal(const float withdrawAmount) {
 void SavingsAccount::setInterestRate(const float interest) {this->interest = (interest / 100);}
 float SavingsAccount::getInterestRate() const {return this->interest;}
 
+// std::ostream& operator<<(std::ostream& os, const SavingsAccount& savings) {
+//     os << static_cast<const Account&>(savings) << "\n";
+//     os << "Interest Rate: " << savings.getInterestRate() << "%" << "\n";
+//     return os;
+// }
+
 std::ostream& operator<<(std::ostream& os, const SavingsAccount& savings) {
-    os << static_cast<const Account&>(savings) << "\n";
-    os << "Interest Rate: " << savings.getInterestRate() << "%" << "\n";
+    return savings.print(os);
+}
+std::ostream& SavingsAccount::print(std::ostream& os) const {
+    os << "Savings " << getAccountNumber() << " " << getBalance() << " " << getInterestRate();
     return os;
 }
 

@@ -11,11 +11,11 @@ public:
 
     void insertNode(NODE*);
     void deleteNode(const std::string&);
-    bool depositNode(const std::string&, const float);
-    bool withdrawNode(const std::string&, const float);
+    void depositNode(const std::string&, const float);
+    void withdrawNode(const std::string&, const float);
     void display() const;
 
-    void saveToFile(const std::string&);
+    void saveToFile(const std::string&) const;
 
     void setRootPtr(TreeNode<NODE>*);
     TreeNode<NODE>* getRootPtr() const;
@@ -25,9 +25,11 @@ private:
 
     void insertHelper(TreeNode<NODE>*&, NODE*);
     void deleteHelper(TreeNode<NODE>*&, const std::string&);
-    bool depositHelper(TreeNode<NODE>*&, const std::string&, const float);
-    bool withdrawHelper(TreeNode<NODE>*&, const std::string&, const float);
+    void depositHelper(TreeNode<NODE>*, const std::string&, const float);
+    void withdrawHelper(TreeNode<NODE>*, const std::string&, const float);
     void displayHelper(TreeNode<NODE>*) const;
+
+    void saveToFileHelper(const TreeNode<NODE>*, std::ofstream& outFile) const;
 };
 
 template <typename NODE>
@@ -52,8 +54,21 @@ void Tree<NODE>::insertHelper(TreeNode<NODE>*& current, NODE* account) {
 }
 
 template <typename NODE>
-void Tree<NODE>::saveToFile(const std::string& fileName) {
-    std::cout << "Writing to file: " << fileName << std::endl;
+void Tree<NODE>::saveToFile(const std::string& fileName) const{
+    std::ofstream outFile(fileName);
+    if(!outFile) {
+        throw std::runtime_error("Unable to open file: " + fileName);
+    }
+    saveToFileHelper(rootPtr, outFile);
+    outFile.close();
+}
+template <typename NODE>
+void Tree<NODE>::saveToFileHelper(const TreeNode<NODE>* current, std::ofstream& outFile) const{
+    if(current) {
+        saveToFileHelper(current->getLeftPtr(), outFile);
+        outFile << *current->getAccount() << "\n";
+        saveToFileHelper(current->getRightPtr(), outFile);
+    }
 }
 
 template <typename NODE>
@@ -115,18 +130,14 @@ void Tree<NODE>::deleteHelper(TreeNode<NODE>*& current, const std::string& accou
 }
 
 template <typename NODE>
-bool Tree<NODE>::depositNode(const std::string& accountNumber, const float amount) { 
-    if(depositHelper(rootPtr, accountNumber, amount)) {
-        return true;
-    } 
-    else {
-        return false;
-    }
+void Tree<NODE>::depositNode(const std::string& accountNumber, const float amount) { 
+    depositHelper(rootPtr, accountNumber, amount);
 }
 template <typename NODE>
-bool Tree<NODE>::depositHelper(TreeNode<NODE>*& current, const std::string& accountNumber, const float amount) {
+void Tree<NODE>::depositHelper(TreeNode<NODE>* current, const std::string& accountNumber, const float amount) {
     if(current == nullptr) {
-        return false;
+        std::cout << "\nDeposit Unsuccessful. Account Not Found!\n";
+        return;
     }
     if(accountNumber < current->getAccount()->getAccountNumber()) {
         depositHelper(current->getLeftPtr(), accountNumber, amount);
@@ -136,25 +147,21 @@ bool Tree<NODE>::depositHelper(TreeNode<NODE>*& current, const std::string& acco
     }
     else if(accountNumber == current->getAccount()->getAccountNumber()) {
         if(current->getAccount()->deposit(amount)) {
-            return true;
+            std::cout << "\nDeposit Successful!\n";
+            return;
         }
     }
-    return false;
 }
 
 template<typename NODE>
-bool Tree<NODE>::withdrawNode(const std::string& accountNumber, const float amount) { 
-    if(withdrawHelper(rootPtr, accountNumber, amount)) {
-        return true;
-    } 
-    else {
-        return false;
-    }
+void Tree<NODE>::withdrawNode(const std::string& accountNumber, const float amount) { 
+    withdrawHelper(rootPtr, accountNumber, amount);
 }
 template<typename NODE>
-bool Tree<NODE>::withdrawHelper(TreeNode<NODE>*& current, const std::string& accountNumber, const float amount) {
+void Tree<NODE>::withdrawHelper(TreeNode<NODE>* current, const std::string& accountNumber, const float amount) {
      if(current == nullptr) {
-        return false;
+        std::cout << "\nWithdraw Unsuccessful. Account Not Found!\n";
+        return;
     }
     if(accountNumber < current->getAccount()->getAccountNumber()) {
         depositHelper(current->getLeftPtr(), accountNumber, amount);
@@ -164,10 +171,10 @@ bool Tree<NODE>::withdrawHelper(TreeNode<NODE>*& current, const std::string& acc
     }
     else if(accountNumber == current->getAccount()->getAccountNumber()) {
         if(current->getAccount()->withdrawal(amount)) {
-           return true;
+            std::cout << "\nWithdraw Successful!\n";
+            return;
         }
     }
-    return false;
 }
 
 template <typename NODE>

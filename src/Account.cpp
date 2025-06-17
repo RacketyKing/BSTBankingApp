@@ -6,10 +6,18 @@ bool hasNDigits(const std::string& accountNumber) {
     return std::regex_match(accountNumber, pattern);
 }
 
+// std::ostream& operator<<(std::ostream& os, const Account& account) {
+//     os << "Account Number: " << account.getAccountNumber() << std::endl;
+//     os << "Account Balance: $" << account.getBalance() << std::endl;
+//     return os;
+// }
+
 std::ostream& operator<<(std::ostream& os, const Account& account) {
-    os << "Account Number: " << account.getAccountNumber() << std::endl;
-    os << "Account Balance: $" << account.getBalance() << std::endl;
-    return os;
+   return account.print(os);
+}
+std::ostream& Account::print(std::ostream& os) const {
+    os << "Account " << getAccountNumber() << " " << getBalance();
+    return os; 
 }
 
 std::istream& operator>>(std::istream& is, Account& account) {
@@ -73,7 +81,6 @@ bool Account::withdrawal(const float withdrawAmount) {
 }
 
 void Account::display() const{
-    std::cout << "\nWelcome, dear customer!" << std::endl;
     std::cout << "Account Number: " << getAccountNumber() << std::endl;
     std::cout << "Account Balance: $" << getBalance() << "\n\n";
 }

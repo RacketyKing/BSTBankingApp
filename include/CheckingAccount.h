@@ -17,6 +17,10 @@ public:
 
     void setOverDraftLimit(const float);
     float getOverDraftLimit() const;
+
+protected:
+    std::ostream& print(std::ostream&) const override;
+
 private:
     float overDraftLimit = 0.00f;
 };

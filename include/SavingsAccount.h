@@ -17,6 +17,10 @@ public:
 
     void setInterestRate(const float);
     float getInterestRate() const;
+
+protected:
+    std::ostream& print(std::ostream&) const override;
+
 private:
     float interest;
 
